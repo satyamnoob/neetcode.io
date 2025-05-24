@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 class Pair {
     private int timestamp;
     private String value;
@@ -10,8 +15,8 @@ class Pair {
     public int getTimestamp() {
         return this.timestamp;
     }
-    
-    public String getValue() { 
+
+    public String getValue() {
         return this.value;
     }
 }
@@ -22,14 +27,14 @@ class TimeMap {
     public TimeMap() {
         map = new HashMap<>();
     }
-    
+
     public void set(String key, String value, int timestamp) {
         map.putIfAbsent(key, new ArrayList<>());
         map.get(key).add(new Pair(timestamp, value));
     }
-    
+
     public String get(String key, int timestamp) {
-        if(!map.containsKey(key)) {
+        if (!map.containsKey(key)) {
             return "";
         }
 
@@ -42,18 +47,18 @@ class TimeMap {
         String result = "";
         int left = 0, right = pairs.size() - 1;
 
-        while(left <= right) {
+        while (left <= right) {
             int mid = left + (right - left) / 2;
 
             int midTimestamp = pairs.get(mid).getTimestamp();
 
             if (midTimestamp <= timestamp) {
-                result = pairs.get(mid).getValue(); 
-                left = mid + 1; 
+                result = pairs.get(mid).getValue();
+                left = mid + 1;
             } else {
                 right = mid - 1;
             }
-              
+
         }
 
         return result;
